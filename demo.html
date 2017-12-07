@@ -1,0 +1,81 @@
+<html>
+        <head>
+          <meta charset="UTF-8">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          <title>mobiscroll</title>
+          <!-- <link type="text/css" rel="stylesheet" href="../js/mobiscroll.custom-2.6.2.min.css" /> -->
+        <link rel="stylesheet" href="./mobiscroll.css">
+        </head>
+        <body>
+          <!--mobiscroll会将表单控件的value属性与插件的输入值绑定-->
+          <input id="date" name="date" /><br />
+          <input id="time" name="time" /><br />
+          <input type="button" value="showTime" onclick="showTime()">
+
+          <!-- <select name="date" id="selectDate">
+            <optgroup label="选择时间" >
+              <option value="a">1</option>
+              <option value="b">2</option>
+              <option value="c">3</option>
+           </optgroup>
+          </select> -->
+
+          <input type="text"  id="selectDate">
+       
+        <!--一般将js脚本文件放在body元素的底部就是为了加快网页的加载，因为网页的加载和脚本的加载是分开的-->
+        <!-- <script src="../js/jquery-3.1.0.js"></script> -->
+        <!-- <script src="../js/mobiscroll.custom-2.6.2.min.js"></script> -->
+        <script src="./zepto.js"></script>
+        <script src="./mobiscroll.js"></script>
+        <script> 
+      //初始化日期控件
+      /** 日期控件  start */
+      var now = new Date();
+      var currYear = now.getFullYear();
+      var currMonth = now.getMonth() + 1;
+      var currDay = now.getDate();
+       
+      //mobiScroll插件选项
+      var opt1 = {
+        preset : 'date', //日期，可选：date\datetime\time\tree_list\image_text\select
+        theme : 'mobiscroll', //皮肤样式，可选：default\android\android-ics light\android-ics\ios\jqm\sense-ui\wp light\wp
+        display : 'bottom', //显示方式 ，可选：modal\inline\bubble\top\bottom
+        mode : 'scroller', //日期选择模式，可选：scroller\clickpick\mixed
+        lang : 'zh',
+        dateFormat : 'yyyy-mm-dd', // 面板日期格式
+        setText : '确认', //确认按钮名称
+        cancelText : '取消', //取消按钮名籍我
+        dateOrder : 'yyyymmdd', //面板中日期排列格式
+        dayText : '日',
+        monthText : '月',
+        yearText : '年', //面板中年月日文字
+        showNow : false,
+        headerText:'选择时间',
+	    tap:true,
+        nowText : "今",
+        endYear: currYear, //结束年份
+        minDate: new Date(currYear-100, currMonth - 1, currDay+1),
+        maxDate: new Date(currYear,currMonth - 1,currDay-1),
+        // defaultValue: [ currYear-100, currMonth - 1, currDay+1,currYear, currMonth, currDay-1],
+        onSelect:function(textVale,inst){ //选中时触发事件
+          console.log("我被选中了.....");
+          console.log(currYear,currMonth,currDay)
+        },
+        onClose:function(textVale,inst){ //插件效果退出时执行 inst:表示点击的状态反馈：set/cancel
+          console.log("textVale--"+textVale);
+          console.log(this.id);//this表示调用该插件的对象
+        }
+      };
+       
+      //时间面板显示日期
+      $("#date").mobiscroll().date(opt1); 
+      //面板显示时间
+      $("#time").mobiscroll().time(opt1);
+      $("#selectDate").mobiscroll().date(opt1);
+       
+      function showTime(){
+        alert($('#date').val());
+      }
+      </script> 
+        </body>
+      </html>
